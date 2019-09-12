@@ -1,2 +1,5 @@
 *.class
 *.ctxt
+.mypy_cache
+build
+node_modules
