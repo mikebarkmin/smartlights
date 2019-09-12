@@ -45,3 +45,14 @@ Alle Informationen werden in einer [SQLite](https://sqlite.org) Datenbank gespei
   * [Java](desktop/java)
   * [Node-RED](desktop/nodered)
   * [Python](desktop/python)
+
+## Testen
+
+Natürlich kann die Implementierung der Basisstation im gesamten System
+getestet werden. Es ist aber auch möglich die Basisstation unabhängig vom
+restlichen System zu testen, indem die einzelnen Endpunkte aufgerufen werden.
+Zum Beispiel mit:
+
+* Android: [RestClient](https://play.google.com/store/apps/details?id=com.app.restclient&hl=en_US)
+* Desktop: [Insomnia](https://insomnia.rest) importiere [insomnia](insomnia.json) oder lege die Anfragen neu an
+* Terminal: [Curl](https://curl.haxx.se/) `curl http://localhost:8000` oder `curl --header "Content-Type: application/json" --request POST --data '{"ip_address": "192.169.2.72", "port": "80", "name": "Schlafzimmer", r": 100,"g": 0, "b": 20}' http://localhost:8000/lights`

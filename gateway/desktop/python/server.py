@@ -10,7 +10,7 @@ def get_devices():
     """
     Gib alle IP Adressen der Netwerkgeräte
     """
-    return jsonify([d.ip_address() for d in NetworkDevice.all()])
+    return jsonify([d.ip_address for d in NetworkDevice.all()])
 
 
 @app.route("/lights", methods=["POST", "GET"])
