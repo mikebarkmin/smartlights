@@ -6,7 +6,7 @@ app = Flask(__name__)
 led = Led(0, 0, 0)
 
 
-@app.route("/led", methods=["GET", "POST"])
+@app.route("/leds", methods=["GET", "POST"])
 def handle_led():
     if request.method == "GET":
         return get_led()
