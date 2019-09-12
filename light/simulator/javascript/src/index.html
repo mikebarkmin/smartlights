@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Smartlights - Simulator</title>
+    <style>
+      * {
+        font-family: sans;
+      }
+
+      #lights {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .light {
+        border-radius: 4px;
+        height: 200px;
+        margin: 10px;
+        padding: 10px;
+        position: relative;
+        width: 200px;
+      }
+
+      .light > .name {
+        background-color: black;
+        bottom: 0;
+        color: white;
+        height: 20px;
+        left: 0;
+        margin: auto;
+        overflow: hidden;
+        padding: 4px;
+        position: absolute;
+        right: 0;
+        text-align: center;
+        text-overflow: ellipsis;
+        top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <template id="template-light">
+      <div class="light">
+        <span class="name"></span>
+      </div>
+    </template>
+    <div id="lights"></div>
+    <script>
+      let lightTemplate = document.getElementById('template-light');
+      let lightsNode = document.getElementById('lights');
+
+      function updateLights() {
+        fetch('/lights')
+          .then(function(res) {
+            return res.json();
+          })
+          .then(function(lights) {
+            lightsNode.innerHTML = '';
+            for (let key in lights) {
+              let light = lights[key];
+              let node = document.importNode(lightTemplate.content, true);
+              let lightNode = node.querySelector('.light');
+              let nameNode = lightNode.querySelector('.name');
+              nameNode.textContent = key;
+              lightsNode.appendChild(lightNode);
+              lightNode.style.backgroundColor = `rgb(${light.r}, ${light.b}, ${light.g})`;
+            }
+          });
+      }
+
+      setInterval(updateLights, 1000);
+    </script>
+  </body>
+</html>
