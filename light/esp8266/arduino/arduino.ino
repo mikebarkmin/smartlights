@@ -2,10 +2,10 @@
 
 #include <DNSServer.h>            //Local DNS Server used for redirecting all requests to the configuration portal
 #include <ESP8266WebServer.h>     //Local WebServer used to serve the configuration portal
-#include <WiFiManager.h>          //https://github.com/tzapu/WiFiManager WiFi Configuration Magic
 #include <ArduinoJson.h>
 
-WiFiManager wifiManager;
+const char* ssid     = "gateway-xx";
+const char* password = "xxx";
 
 ESP8266WebServer server(80);
 
@@ -53,7 +53,18 @@ void setLeds() {
 void setup(void){
   Serial.begin(115200);
   
-  wifiManager.autoConnect();
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.println("WiFi connected");
+  Serial.println("IP address: ");
+  Serial.println(WiFi.localIP());
   
   pinMode(PIN_R, OUTPUT);
   analogWrite(PIN_R, r);
