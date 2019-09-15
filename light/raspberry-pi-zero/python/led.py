@@ -4,13 +4,13 @@ from gpiozero import PWMLED
 class Led():
     def __init__(self, r: float, g: float, b: float):
         self.__r = r
-        self.__r_pwm = PWMLED(2)
+        self.__r_pwm = PWMLED(3)
 
         self.__g = g
-        self.__g_pwm = PWMLED(3)
+        self.__g_pwm = PWMLED(5)
 
         self.__b = b
-        self.__b_pwm = PWMLED(4)
+        self.__b_pwm = PWMLED(7)
 
     @classmethod
     def limit_to_rgb(cls, number):
